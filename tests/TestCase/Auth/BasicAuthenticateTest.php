@@ -181,7 +181,7 @@ class BasicAuthenticateTest extends TestCase
 
         $this->assertNotEmpty($e);
 
-        $expected = ['WWW-Authenticate: Basic realm="localhost"'];
+        $expected = ['WWW-Authenticate' => 'Basic realm="localhost"'];
         $this->assertEquals($expected, $e->responseHeader());
     }
 
@@ -220,7 +220,7 @@ class BasicAuthenticateTest extends TestCase
      */
     public function testAuthenticateFailReChallenge()
     {
-        $this->auth->config('scope.username', 'nate');
+        $this->auth->setConfig('scope.username', 'nate');
         $request = new ServerRequest([
             'url' => 'posts/index',
             'environment' => [
