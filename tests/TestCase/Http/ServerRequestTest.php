@@ -1438,7 +1438,7 @@ class ServerRequestTest extends TestCase
         $this->assertEquals('a, b', $request->getHeaderLine('Double'), 'old request is unchanged');
         $this->assertEquals('a, b, c', $new->getHeaderLine('Double'), 'new request is correct');
 
-        $this->deprecated(function() use ($new) {
+        $this->deprecated(function () use ($new) {
             $this->assertEquals(['a', 'b', 'c'], $new->header('Double'));
         });
 
@@ -1469,7 +1469,7 @@ class ServerRequestTest extends TestCase
         $this->assertEquals(1337, $request->getHeaderLine('Content-length'), 'old request is unchanged');
         $this->assertEquals('', $new->getHeaderLine('Content-length'), 'new request is correct');
 
-        $this->deprecated(function() use($new) {
+        $this->deprecated(function () use($new) {
             $this->assertNull($new->header('Content-Length'));
         });
     }
@@ -2413,7 +2413,7 @@ class ServerRequestTest extends TestCase
      */
     public function testQuery()
     {
-        $this->deprecated(function() {
+        $this->deprecated(function () {
             $array = [
                 'query' => ['foo' => 'bar', 'zero' => '0']
             ];
@@ -2559,17 +2559,17 @@ class ServerRequestTest extends TestCase
             ]
         ];
         $request = new ServerRequest(compact('post'));
-        $this->deprecated(function() use ($post, $request) {
+        $this->deprecated(function () use ($post, $request) {
             $this->assertEquals($post['Model'], $request->data('Model'));
         });
         $this->assertEquals($post['Model'], $request->getData('Model'));
 
-        $this->deprecated(function() use ($post, $request) {
+        $this->deprecated(function () use ($post, $request) {
             $this->assertEquals($post, $request->data());
         });
         $this->assertEquals($post, $request->getData());
 
-        $this->deprecated(function() use ($request) {
+        $this->deprecated(function () use ($request) {
             $this->assertNull($request->data('Model.imaginary'));
         });
         $this->assertNull($request->getData('Model.imaginary'));
@@ -2598,7 +2598,7 @@ class ServerRequestTest extends TestCase
      */
     public function testDataWriting()
     {
-        $this->deprecated(function() {
+        $this->deprecated(function () {
             $_POST['data'] = [
                 'Model' => [
                     'field' => 'value'
