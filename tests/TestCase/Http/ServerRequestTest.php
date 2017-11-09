@@ -661,7 +661,7 @@ class ServerRequestTest extends TestCase
      */
     public function testDefaultEnvValue()
     {
-        $this->deprecated(function() {
+        $this->deprecated(function () {
             $_ENV['DOES_NOT_EXIST'] = null;
             $request = new ServerRequest();
             $this->assertNull($request->getEnv('DOES_NOT_EXIST'));
@@ -861,7 +861,7 @@ class ServerRequestTest extends TestCase
      */
     public function testMethod()
     {
-        $this->deprecated(function() {
+        $this->deprecated(function () {
             $request = new ServerRequest(['environment' => ['REQUEST_METHOD' => 'delete']]);
 
             $this->assertEquals('delete', $request->method());
@@ -1120,7 +1120,7 @@ class ServerRequestTest extends TestCase
      */
     public function testMagicget()
     {
-        $this->deprecated(function() {
+        $this->deprecated(function () {
             $request = new ServerRequest();
             $request->params = ['controller' => 'posts', 'action' => 'view', 'plugin' => 'blogs'];
 
@@ -1138,7 +1138,7 @@ class ServerRequestTest extends TestCase
      */
     public function testMagicisset()
     {
-        $this->deprecated(function() {
+        $this->deprecated(function () {
             $request = new ServerRequest();
             $request->params = [
                 'controller' => 'posts',
@@ -1159,7 +1159,7 @@ class ServerRequestTest extends TestCase
      */
     public function testArrayAccess()
     {
-        $this->deprecated(function() {
+        $this->deprecated(function () {
             $request = new ServerRequest();
             $request->params = ['controller' => 'posts', 'action' => 'view', 'plugin' => 'blogs'];
 
@@ -1406,14 +1406,14 @@ class ServerRequestTest extends TestCase
 
         $this->assertEquals(1337, $request->getHeaderLine('Content-length'), 'old request is unchanged');
         $this->assertEquals(999, $new->getHeaderLine('Content-length'), 'new request is correct');
-        $this->deprecated(function() use ($new) {
+        $this->deprecated(function () use ($new) {
             $this->assertEquals(999, $new->header('Content-Length'));
         });
 
         $new = $request->withHeader('Double', ['a']);
         $this->assertEquals(['a'], $new->getHeader('Double'), 'List values are overwritten');
 
-        $this->deprecated(function() use ($new) {
+        $this->deprecated(function () use ($new) {
             $this->assertEquals(['a'], $new->header('Double'), 'headers written in bc way.');
         });
     }
@@ -2720,7 +2720,8 @@ class ServerRequestTest extends TestCase
             'action' => 'index',
         ]);
 
-        $this->assertInstanceOf('Cake\Http\ServerRequest',
+        $this->assertInstanceOf(
+            'Cake\Http\ServerRequest',
             $request->withParam('some', 'thing'),
             'Method has not returned $this'
         );
@@ -2794,7 +2795,7 @@ class ServerRequestTest extends TestCase
      */
     public function testHere()
     {
-        $this->deprecated(function() {
+        $this->deprecated(function () {
             Configure::write('App.base', '/base_path');
             $q = ['test' => 'value'];
             $request = new ServerRequest([
@@ -2829,7 +2830,7 @@ class ServerRequestTest extends TestCase
      */
     public function testHereWithSpaceInUrl()
     {
-        $this->deprecated(function() {
+        $this->deprecated(function () {
             Configure::write('App.base', '');
             $_GET = ['/admin/settings/settings/prefix/Access_Control' => ''];
             $request = new ServerRequest('/admin/settings/settings/prefix/Access%20Control');
@@ -2846,7 +2847,7 @@ class ServerRequestTest extends TestCase
      */
     public function testSetInput()
     {
-        $this->deprecated(function() {
+        $this->deprecated(function () {
             $request = new ServerRequest();
 
             $request->setInput('I came from setInput');
@@ -3065,12 +3066,12 @@ XML;
             ]
         ]);
 
-        $this->deprecated(function() use ($request) {
+        $this->deprecated(function () use ($request) {
             $this->assertEquals('A value in the cookie', $request->cookie('testing'));
         });
         $this->assertEquals('A value in the cookie', $request->getCookie('testing'));
 
-        $this->deprecated(function() use ($request) {
+        $this->deprecated(function () use ($request) {
             $this->assertNull($request->cookie('not there'));
         });
 
@@ -3201,7 +3202,7 @@ XML;
      */
     public function testSession()
     {
-        $this->deprecated(function() {
+        $this->deprecated(function () {
             $session = new Session;
             $request = new ServerRequest(['session' => $session]);
             $this->assertSame($session, $request->session());
